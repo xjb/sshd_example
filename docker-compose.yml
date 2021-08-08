@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  sshd:
+    image: linuxserver/openssh-server
+    ports:
+      - "22:2222"
+    environment:
+      # PUID: 1000
+      # PGID: 1000
+      # TZ: Asia/Tokyo
+      # PUBLIC_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDS8/Eac0xzJMdpZR3ec2jt7GExgjJtYUdI3VXpzXyywwHmOfOhSAUqEnqx0g+XRozLamBNP+Vwdu7ie6yTdciZoUWZU7Dz8wfeyPgInXS1eonfGxuomim245tnTPB14dOgXk49dmr2sB1lZw03fiiV1m3XKSqediNzQEBc+QNK9jgCdtyhPZfiY4NzsBXuQSJize6Up2RgjdEwFOrmEsgSJ8s6vqABRpsxAy0xN2eItLSoPGRasdyhHd8tKFO2LpfihYGa/38oOA8WAcSa8JHTeQn/wYQlmO/IUEiSvUtjFwrtbnMVae0/yuB85rXBF3pmW6b5GGOz1CuEhuTzTYN3i63eMYsjZZCQP9FvP7LDi6b0VP4G1ZbuT2LDJnERFzJhio+997bouXhI2+KNqL9dP8Hmi6JiGT/va2pl2gHI67GqKRwSVJDej1gkEZ663S8JUcxQIPPp+kv5kPXuslc9fVk9EiKcPNwqUtipGkkDdwo5oR6WfSLKpGz/6HbZpQk= ssh@bd20f8f31b57
+      PUBLIC_KEY_FILE: /run/secrets/public_key_file
+      SUDO_ACCESS: "true"
+      # PASSWORD_ACCESS: "true"
+      # USER_PASSWORD: password
+      USER_NAME: ssh
+    secrets:
+      - public_key_file
+
+secrets:
+  public_key_file:
+    file: ~/.ssh/id_rsa.pub
